@@ -55,6 +55,9 @@ pub enum Target {
     /// in a browser but pollutes the global namespace and must be manually
     /// instantiated.
     NoModules,
+
+    /// Generate C header file to use wasm2c.
+    Wasm2c,
 }
 
 impl Default for Target {
@@ -70,6 +73,7 @@ impl fmt::Display for Target {
             Target::Web => "web",
             Target::Nodejs => "nodejs",
             Target::NoModules => "no-modules",
+            Target::Wasm2c => "wasm2c",
         };
         write!(f, "{}", s)
     }
@@ -83,6 +87,7 @@ impl FromStr for Target {
             "web" => Ok(Target::Web),
             "nodejs" => Ok(Target::Nodejs),
             "no-modules" => Ok(Target::NoModules),
+            "wasm2c" => Ok(Target::Wasm2c),
             _ => bail!("Unknown target: {}", s),
         }
     }
@@ -128,7 +133,7 @@ pub struct BuildOptions {
     pub disable_dts: bool,
 
     #[structopt(long = "target", short = "t", default_value = "bundler")]
-    /// Sets the target environment. [possible values: bundler, nodejs, web, no-modules]
+    /// Sets the target environment. [possible values: bundler, nodejs, web, no-modules, wasm2c]
     pub target: Target,
 
     #[structopt(long = "debug")]

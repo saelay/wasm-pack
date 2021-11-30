@@ -58,7 +58,7 @@ pub enum Command {
     /// 🎆  pack up your npm package and publish!
     Publish {
         #[structopt(long = "target", short = "t", default_value = "bundler")]
-        /// Sets the target environment. [possible values: bundler, nodejs, web, no-modules]
+        /// Sets the target environment. [possible values: bundler, nodejs, web, no-modules, wasm2c]
         target: String,
 
         /// The access level for the package to be published
